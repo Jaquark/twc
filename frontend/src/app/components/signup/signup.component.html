@@ -1,0 +1,26 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="username">Username</label>
+    <input id="username" formControlName="username" type="text" required />
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" type="email" required />
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input id="password" formControlName="password" type="password" required />
+  </div>
+
+  <div>
+    <label for="role">Role</label>
+    <select formControlName="role" required>
+      <option value="Customer">Customer</option>
+      <option value="Librarian">Librarian</option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+</form>

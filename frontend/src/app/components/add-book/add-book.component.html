@@ -1,0 +1,25 @@
+<div class="add-book-container">
+    <h2>Add a New Book</h2>
+  
+    <form (submit)="addBook()">
+      <div>
+        <label>Title:</label>
+        <input type="text" [(ngModel)]="book.title" required />
+      </div>
+      <div>
+        <label>Author:</label>
+        <input type="text" [(ngModel)]="book.author" required />
+      </div>
+      <div>
+        <label>Description:</label>
+        <textarea [(ngModel)]="book.description"></textarea>
+      </div>
+      <div>
+        <label>Cover Image URL:</label>
+        <input type="text" [(ngModel)]="book.coverImage" />
+      </div>
+      <button type="submit">Add Book</button>
+    </form>
+  
+    <p *ngIf="message" class="message">{{ message }}</p>
+  </div>

@@ -1,0 +1,23 @@
+<div *ngIf="book; else notFound">
+  <h2>{{ book.title }}</h2>
+  <img [src]="book.coverImage" alt="{{ book.title }}" />
+  <p><strong>Author:</strong> {{ book.author }}</p>
+  <p><strong>Description:</strong> {{ book.description }}</p>
+  <p><strong>Average Rating:</strong> {{ book.averageRating }} ⭐</p>
+
+  <h3>Reviews</h3>
+  <div *ngIf="reviews.length > 0; else noReviews">
+    <div *ngFor="let review of reviews" class="review">
+      <strong>{{ review.username }}</strong> - {{ review.rating }} ⭐
+      <p>{{ review.comment }}</p>
+    </div>
+  </div>
+
+  <ng-template #noReviews>
+    <p>No reviews yet.</p>
+  </ng-template>
+</div>
+
+<ng-template #notFound>
+  <p>Book not found.</p>
+</ng-template>

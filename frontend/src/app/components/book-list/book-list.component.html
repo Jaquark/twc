@@ -1,0 +1,15 @@
+<div class="book-list" *ngIf="books.length > 0">
+    <div *ngFor="let book of books" class="book-item">
+      <img [src]="book.coverImage" alt="{{ book.title }}" />
+      <div>
+        <h3>{{ book.title }}</h3>
+        <p>by {{ book.author }}</p>
+        <button *ngIf="authService.isAuthenticated()" (click)="checkoutBook(book.id)">
+          Check Out
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <p *ngIf="message" class="message">{{ message }}</p>
+  <p *ngIf="books.length === 0">No books available.</p>

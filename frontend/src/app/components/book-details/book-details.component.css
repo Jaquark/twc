@@ -1,0 +1,11 @@
+img {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 10px 0;
+}
+
+.review {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}

@@ -1,0 +1,25 @@
+<div class="checkouts-container" *ngIf="checkouts.length > 0; else noCheckouts">
+    <h2>Checked-Out Books</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th *ngIf="authService.isLibrarian()">Borrowed By</th>
+          <th>Checkout Date</th>
+          <th>Due Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let checkout of checkouts">
+          <td>{{ checkout.title }}</td>
+          <td *ngIf="authService.isLibrarian()">{{ checkout.borrowedBy }}</td>
+          <td>{{ checkout.checkoutDate | date }}</td>
+          <td>{{ checkout.dueDate | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #noCheckouts>
+    <p>No books checked out.</p>
+  </ng-template>

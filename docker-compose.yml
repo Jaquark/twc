@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-server
+    restart: always
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend-api
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - "5007:5007"
+      - "5000:5000"
+      - "5001:5001"
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend-app
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "4000:4000"

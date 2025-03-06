@@ -1,0 +1,33 @@
+<div *ngIf="book; else notFound">
+    <h2>Edit Book</h2>
+  
+    <form (submit)="saveChanges()">
+      <div>
+        <label>Title:</label>
+        <input type="text" [(ngModel)]="book.title" required />
+      </div>
+      <div>
+        <label>Author:</label>
+        <input type="text" [(ngModel)]="book.author" required />
+      </div>
+      <div>
+        <label>Description:</label>
+        <textarea [(ngModel)]="book.description"></textarea>
+      </div>
+      <div>
+        <label>Cover Image URL:</label>
+        <input type="text" [(ngModel)]="book.coverImage" />
+      </div>
+      <button type="submit">Save Changes</button>
+    </form>
+  
+    <!-- ✅ Delete Book Button (Visible Only to Librarians) -->
+    <button class="delete-button" (click)="deleteBook()">Delete Book</button>
+  
+    <p *ngIf="message" class="message">{{ message }}</p>
+  </div>
+  
+  <ng-template #notFound>
+    <p>Book not found.</p>
+  </ng-template>
+  

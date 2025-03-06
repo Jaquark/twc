@@ -1,0 +1,26 @@
+<nav>
+  <h1>{{ title }}</h1>
+  <ul>
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/book-search">Search Books</a></li>
+
+    <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+    <li *ngIf="!isLoggedIn"><a routerLink="/signup">Sign Up</a></li>
+
+    <li *ngIf="isLoggedIn && userRole === 'Customer'">
+      <a routerLink="/my-checkouts">My Checkouts</a>
+    </li>
+
+    <li *ngIf="isLoggedIn && userRole === 'Librarian'">
+      <a routerLink="/add-book">Add Book</a>
+      <a routerLink="/manage-books">Manage Books</a>
+    </li>
+
+    <li *ngIf="isLoggedIn">
+      <button (click)="logout()">Logout</button>
+    </li>
+  </ul>
+</nav>
+
+<!-- Router Outlet for Page Content -->
+<router-outlet></router-outlet>

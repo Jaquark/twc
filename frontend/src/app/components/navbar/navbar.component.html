@@ -1,0 +1,6 @@
+<nav>
+  <a routerLink="/my-checkouts" *ngIf="authService.isAuthenticated()">My Checkouts</a>
+  <a routerLink="/login" *ngIf="!authService.isAuthenticated()">Login</a>
+  <a routerLink="/signup" *ngIf="!authService.isAuthenticated()">Sign Up</a>
+  <button *ngIf="authService.isAuthenticated()" (click)="logout()">Logout</button>
+</nav>

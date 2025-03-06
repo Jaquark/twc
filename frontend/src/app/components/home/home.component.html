@@ -1,0 +1,10 @@
+<div class="home-container">
+    <h1>Welcome to the Library Management System</h1>
+    <p>Browse books, manage your checkouts, and more.</p>
+  
+    <div class="actions">
+      <a routerLink="/book-search" class="btn">Browse Books</a>
+      <a *ngIf="!isLoggedIn" routerLink="/login" class="btn">Login</a>
+      <a *ngIf="isLoggedIn" routerLink="/my-checkouts" class="btn">My Checkouts</a>
+    </div>
+</div>
