@@ -38,6 +38,9 @@ public class UsersController : ControllerBase
             return Conflict("Email is already taken.");
         }
 
+        user.Reviews = null;
+        user.Checkouts = null;
+
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 

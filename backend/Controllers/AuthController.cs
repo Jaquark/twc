@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 
 namespace Library.Controllers
 {
@@ -33,7 +33,13 @@ namespace Library.Controllers
         {
             var passwordHasher = new PasswordHasher<User>();
             var user = await _context.Users.SingleOrDefaultAsync(u => u.Username == loginDto.Username);
-            if (user == null || !VerifyPassword(passwordHasher.HashPassword(null, loginDto.Password), user.PasswordHash))
+            if (user == null)
+            {
+                return Unauthorized("Invalid username or password.");
+            }
+            var verifyResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginDto.Password);
+
+            if (verifyResult != PasswordVerificationResult.Success)
             {
                 return Unauthorized("Invalid username or password.");
             }
@@ -75,12 +81,6 @@ namespace Library.Controllers
                 return Ok(new { username = User.Identity.Name, role = User.FindFirst(ClaimTypes.Role)?.Value });
             }
             return Unauthorized("No active session.");
-        }
-
-        private bool VerifyPassword(string password, string storedHash)
-        {
-            // Replace with actual password hashing logic
-            return password == storedHash;
         }
     }
 }

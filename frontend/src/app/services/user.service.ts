@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Checkout } from '../models/checkout.model';
+import { Review } from '../models/review.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,9 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  signup(user: { username: string; email: string; password: string; role: string }): Observable<any> {
+  signup(user: { Username: string; Email: string; Password: string; Role: string , Reviews: Review[], Checkouts: Checkout[]}): Observable<any> {
+    user.Reviews = [];
+    user.Checkouts = [];
     return this.http.post(this.apiUrl, user);
   }
 }
