@@ -63,14 +63,14 @@ namespace Library.Controllers
                                           new ClaimsPrincipal(claimsIdentity), 
                                           authProperties);
 
-            return Ok("Logged in successfully.");
+            return Ok(new { message = "Logged in successfully." });
         }
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Ok("Logged out successfully.");
+            return Ok(new { message = "Logged out successfully." });
         }
 
         [HttpGet("check-session")]
